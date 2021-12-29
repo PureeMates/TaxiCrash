@@ -10,6 +10,9 @@ namespace TaxiCrush
 {
     class Player
     {
+        public Player()
+        {
 
+        }
     }
 }
