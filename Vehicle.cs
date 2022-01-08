@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using Aiv.Fast2D;
 using OpenTK;
 
-namespace TaxiCrush
+namespace TaxiCrash
 {
     class Vehicle
     {
