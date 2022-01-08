@@ -15,6 +15,8 @@ namespace TaxiCrush
 
         public static Window Win { get { return window; } }
 
+        public static float DeltaTime { get { return window.DeltaTime; } }
+
         public static void Init()
         {
             window = new Window(720, 1280, "Taxi Crush");

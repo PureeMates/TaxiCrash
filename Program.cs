@@ -10,7 +10,8 @@ namespace TaxiCrush
     {
         static void Main(string[] args)
         {
-            
+            Game.Init();
+            Game.Play();
         }
     }
 }
