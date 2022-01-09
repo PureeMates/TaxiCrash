@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TaxiCrush
+namespace TaxiCrash
 {
     class Player
     {
@@ -17,6 +17,9 @@ namespace TaxiCrush
         private float speed;
 
         public bool IsAlive;
+        private bool keyPressed;
+
+        public Vector2 Position { get { return sprite.position; } set { sprite.position = value; } }
 
         public Player()
         {
@@ -27,6 +30,7 @@ namespace TaxiCrush
             speed = 700.0f;
 
             IsAlive = true;
+            keyPressed = false;
         }
 
         public void Input()
@@ -52,22 +56,31 @@ namespace TaxiCrush
 
         private void Move()
         {
-
+            Position += velocity * Game.DeltaTime;
         }
 
         private void MovementInput()
         {
-            if(Game.Window.GetKey(KeyCode.A) || Game.Window.GetKey(KeyCode.Left))
+            if (Game.Window.GetKey(KeyCode.A) || Game.Window.GetKey(KeyCode.Left))
             {
-                velocity = new Vector2();
+                if(!keyPressed)
+                {
+                    keyPressed = true;
+                    velocity.X = -speed;
+                }
             }
-            else if(Game.Window.GetKey(KeyCode.D) || Game.Window.GetKey(KeyCode.Right))
+            else if (Game.Window.GetKey(KeyCode.D) || Game.Window.GetKey(KeyCode.Right))
             {
-
+                if (!keyPressed)
+                {
+                    keyPressed = true;
+                    velocity.X = speed;
+                }
             }
             else
             {
-                velocity = new Vector2(0.0f, 0.0f);
+                keyPressed = false;
+                velocity.X = 0.0f;
             }
         }
     }
