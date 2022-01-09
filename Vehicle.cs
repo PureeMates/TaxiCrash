@@ -21,10 +21,12 @@ namespace TaxiCrash
         public Vehicle()
         {
             texture = new Texture("Assets/Audi.png");
-            sprite = new Sprite(texture.Width, texture.Height);
+            sprite = new Sprite(texture.Width * 0.45f, texture.Height * 0.45f);
             sprite.pivot = new Vector2(sprite.Width * 0.5f, sprite.Height * 0.5f);
+            sprite.position = new Vector2(Game.Win.Width * 0.5f, 55.0f);
 
             speed = 100f;
+            velocity.Y = speed;
         }
 
         public void Update()

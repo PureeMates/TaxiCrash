@@ -24,8 +24,9 @@ namespace TaxiCrash
         public Player()
         {
             texture = new Texture("Assets/taxi.png");
-            sprite = new Sprite(texture.Width, texture.Height);
+            sprite = new Sprite(texture.Width * 0.45f, texture.Height * 0.45f);
             sprite.pivot = new Vector2(sprite.Width * 0.5f, sprite.Height * 0.5f);
+            sprite.position = new Vector2(Game.Win.Width * 0.5f, Game.Win.Height - 70.0f);
 
             speed = 700.0f;
 
@@ -61,7 +62,7 @@ namespace TaxiCrash
 
         private void MovementInput()
         {
-            if (Game.Window.GetKey(KeyCode.A) || Game.Window.GetKey(KeyCode.Left))
+            if (Game.Win.GetKey(KeyCode.A) || Game.Win.GetKey(KeyCode.Left))
             {
                 if(!keyPressed)
                 {
@@ -69,7 +70,7 @@ namespace TaxiCrash
                     velocity.X = -speed;
                 }
             }
-            else if (Game.Window.GetKey(KeyCode.D) || Game.Window.GetKey(KeyCode.Right))
+            else if (Game.Win.GetKey(KeyCode.D) || Game.Win.GetKey(KeyCode.Right))
             {
                 if (!keyPressed)
                 {

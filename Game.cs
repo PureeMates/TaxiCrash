@@ -6,12 +6,14 @@ using System.Threading.Tasks;
 using Aiv.Fast2D;
 using OpenTK;
 
-namespace TaxiCrush
+namespace TaxiCrash
 {
     class Game
     {
         private static Window window;
+        private static Background background;
         private static Player player;
+        private static Vehicle vehicle;
 
         public static Window Win { get { return window; } }
 
@@ -19,24 +21,39 @@ namespace TaxiCrush
 
         public static void Init()
         {
-            window = new Window(720, 1280, "Taxi Crush");
+            window = new Window(720, 900, "Taxi Crush");
+            background = new Background();
+            player = new Player();
+            vehicle = new Vehicle();
         }
         public static void Play()
         {
             while (window.IsOpened)
             {
                 // INPUT
-                
+                Quit();
+                player.Input();
 
                 // UPDATE
-                
+                background.Update();
+                player.Update();
+                vehicle.Update();
 
                 // DRAW
-                
+                background.Draw();
+                player.Draw();
+                vehicle.Draw();
 
                 window.Update();
             }
-        } //
+        }
 
+        private static void Quit()
+        {
+            if(window.GetKey(KeyCode.Esc))
+            {
+                window.Exit();
+            }
+        }
     }
 }

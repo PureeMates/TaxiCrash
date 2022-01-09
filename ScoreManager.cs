@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Aiv.Fast2D;
 
-namespace TaxiCrush
+namespace TaxiCrash
 {
     
     static class ScoreManager

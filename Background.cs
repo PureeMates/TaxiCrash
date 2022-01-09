@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using Aiv.Fast2D;
 using OpenTK;
 
-namespace TaxiCrush
+namespace TaxiCrash
 {
     class Background
     {
@@ -22,15 +22,15 @@ namespace TaxiCrush
             sprite2 = new Sprite(texture.Width, texture.Height);
             sprite.pivot = new Vector2(0, texture.Height);
             sprite2.pivot = new Vector2(0, texture.Height);
-            sprite.position = new Vector2(0, Game.Window.Height);
+            sprite.position = new Vector2(0, Game.Win.Height);
             sprite2.position = new Vector2(0, -texture.Height);
             speed = 300.0f;
         }
 
         public void Update()
         {
-            sprite.position.Y += speed * Game.Window.DeltaTime;
-            sprite2.position.Y += speed * Game.Window.DeltaTime;
+            sprite.position.Y += speed * Game.DeltaTime;
+            sprite2.position.Y += speed * Game.DeltaTime;
             if (sprite.position.Y <= texture.Height)
             {
                 sprite.position.Y = sprite2.position.Y + texture.Height;
