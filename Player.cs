@@ -19,19 +19,23 @@ namespace TaxiCrash
         public bool IsAlive;
         private bool keyPressed;
 
+        private int counter;
+
         public Vector2 Position { get { return sprite.position; } set { sprite.position = value; } }
 
         public Player()
         {
             texture = new Texture("Assets/taxi.png");
-            sprite = new Sprite(texture.Width * 0.45f, texture.Height * 0.45f);
+            sprite = new Sprite(texture.Width * 0.75f, texture.Height * 0.75f);
             sprite.pivot = new Vector2(sprite.Width * 0.5f, sprite.Height * 0.5f);
-            sprite.position = new Vector2(Game.Win.Width * 0.5f, Game.Win.Height - 70.0f);
+            sprite.position = new Vector2(Game.Win.Width * 0.5f, Game.Win.Height - 105.0f);
 
-            speed = 75.0f;
+            speed = 105.0f;
 
             IsAlive = true;
             keyPressed = false;
+
+            counter = 0;
         }
 
         public void Input()
@@ -52,24 +56,36 @@ namespace TaxiCrash
             sprite.DrawTexture(texture);
         }
 
+        private void MoveRight()
+        {
+            keyPressed = true;
+            velocity.X = speed;
+            Position += velocity;
+            counter++;
+        }
+
+        private void MoveLeft()
+        {
+            keyPressed = true;
+            velocity.X = -speed;
+            Position += velocity;
+            counter--;
+        }
+
         private void MovementInput()
         {
-            if (Game.Win.GetKey(KeyCode.A) || Game.Win.GetKey(KeyCode.Left))
+            if ((Game.Win.GetKey(KeyCode.A) || Game.Win.GetKey(KeyCode.Left)) && counter > -3)
             {
                 if(!keyPressed)
                 {
-                    keyPressed = true;
-                    velocity.X = -speed;
-                    Position += velocity;
+                    MoveLeft();
                 }
             }
-            else if (Game.Win.GetKey(KeyCode.D) || Game.Win.GetKey(KeyCode.Right))
+            else if ((Game.Win.GetKey(KeyCode.D) || Game.Win.GetKey(KeyCode.Right)) && counter < 3)
             {
                 if (!keyPressed)
                 {
-                    keyPressed = true;
-                    velocity.X = speed;
-                    Position += velocity;
+                    MoveRight();
                 }
             }
             else
