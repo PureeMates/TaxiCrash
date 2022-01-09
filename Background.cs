@@ -17,13 +17,11 @@ namespace TaxiCrash
 
         public Background()
         {
-            texture = new Texture("Assets/BackgroundStreet-1280-720ok.png");
+            texture = new Texture("Assets/Background720_900.png");
             sprite = new Sprite(texture.Width, texture.Height);
             sprite2 = new Sprite(texture.Width, texture.Height);
-            sprite.pivot = new Vector2(0, texture.Height);
-            sprite2.pivot = new Vector2(0, texture.Height);
-            sprite.position = new Vector2(0, Game.Win.Height);
-            sprite2.position = new Vector2(0, -texture.Height);
+            sprite.position = new Vector2(0, Game.Win.Height - texture.Height);
+            sprite2.position = new Vector2(0, Game.Win.Height - (texture.Height * 2f));
             speed = 300.0f;
         }
 
@@ -31,13 +29,13 @@ namespace TaxiCrash
         {
             sprite.position.Y += speed * Game.DeltaTime;
             sprite2.position.Y += speed * Game.DeltaTime;
-            if (sprite.position.Y <= texture.Height)
+            if (sprite.position.Y  >= texture.Height)
             {
-                sprite.position.Y = sprite2.position.Y + texture.Height;
+                sprite.position.Y = sprite2.position.Y - texture.Height;
             }
-            if (sprite2.position.Y <= texture.Height)
+            if (sprite2.position.Y  >= texture.Height)
             {
-                sprite2.position.Y = sprite.position.Y + texture.Height;
+                sprite2.position.Y = sprite.position.Y - texture.Height;
             }
         }
 
