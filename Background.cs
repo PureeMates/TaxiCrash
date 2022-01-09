@@ -14,6 +14,7 @@ namespace TaxiCrash
         private Sprite sprite2;
         private Texture texture;
         private float speed;
+       
 
         public Background()
         {
