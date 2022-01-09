@@ -28,7 +28,7 @@ namespace TaxiCrash
             sprite.pivot = new Vector2(sprite.Width * 0.5f, sprite.Height * 0.5f);
             sprite.position = new Vector2(Game.Win.Width * 0.5f, Game.Win.Height - 70.0f);
 
-            speed = 700.0f;
+            speed = 75.0f;
 
             IsAlive = true;
             keyPressed = false;
@@ -44,20 +44,12 @@ namespace TaxiCrash
 
         public void Update()
         {
-            if(IsAlive)
-            {
-                Move();
-            }
+            
         }
 
         public void Draw()
         {
             sprite.DrawTexture(texture);
-        }
-
-        private void Move()
-        {
-            Position += velocity * Game.DeltaTime;
         }
 
         private void MovementInput()
@@ -68,6 +60,7 @@ namespace TaxiCrash
                 {
                     keyPressed = true;
                     velocity.X = -speed;
+                    Position += velocity;
                 }
             }
             else if (Game.Win.GetKey(KeyCode.D) || Game.Win.GetKey(KeyCode.Right))
@@ -76,6 +69,7 @@ namespace TaxiCrash
                 {
                     keyPressed = true;
                     velocity.X = speed;
+                    Position += velocity;
                 }
             }
             else
