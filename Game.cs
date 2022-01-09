@@ -36,7 +36,7 @@ namespace TaxiCrush
 
                 window.Update();
             }
-        }
+        } //
 
     }
 }
