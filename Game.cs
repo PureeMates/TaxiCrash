@@ -14,6 +14,7 @@ namespace TaxiCrash
         private static Background background;
         private static Player player;
         private static Vehicle vehicle;
+
         public static Window Win { get { return window; } }
 
         public static float DeltaTime { get { return window.DeltaTime; } }
@@ -36,6 +37,8 @@ namespace TaxiCrash
                 // UPDATE
                 background.Update();
                 vehicle.Update();
+                player.Collides(vehicle);
+
                 // DRAW
                 background.Draw();
                 player.Draw();
