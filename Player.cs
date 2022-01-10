@@ -23,6 +23,8 @@ namespace TaxiCrash
 
         public Vector2 Position { get { return sprite.position; } set { sprite.position = value; } }
 
+        public Vector2 Collider { get { return new Vector2(Position.X + sprite.Width * 0.5f, Position.Y - sprite.Height * 0.5f); } }
+
         public Player()
         {
             texture = new Texture("Assets/taxi.png");
@@ -94,5 +96,31 @@ namespace TaxiCrash
                 velocity.X = 0.0f;
             }
         }
+
+        
+
+        public bool Collides(Vehicle vehicle)
+        {
+            if (vehicle.IsAlive)
+            {
+                Vector2 dist;
+                dist = Vector2.Subtract(Collider, vehicle.Collider);
+
+                if (dist.X == 0 && dist.Y <= 0)
+                {
+                    
+                    return true;
+                }
+            }
+
+            
+            return false;
+        }
+
+        
+
+
+
+
     }
 }

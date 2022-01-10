@@ -37,6 +37,7 @@ namespace TaxiCrash
                 // UPDATE
                 background.Update();
                 vehicle.Update();
+                player.Collides(vehicle);
 
                 // DRAW
                 background.Draw();
