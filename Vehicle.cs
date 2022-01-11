@@ -15,15 +15,14 @@ namespace TaxiCrash
 
         public Vector2 Position { get { return sprite.position; } set { sprite.position = value; } }
 
-        public Vector2 Collider { get { return new Vector2(Position.X + sprite.Width * 0.5f, Position.Y + sprite.Height * 0.5f); } }
-        
+        public Sprite Collider { get { return sprite; } }
 
         private Vector2 velocity;
         private float speed;
 
         public bool IsAlive;
 
-        
+
 
         public Vehicle()
         {
@@ -32,8 +31,7 @@ namespace TaxiCrash
             sprite.pivot = new Vector2(sprite.Width * 0.5f, sprite.Height * 0.5f);
             sprite.position = new Vector2(Game.Win.Width * 0.5f, 55.0f);
 
-            speed = 550f;
-            velocity.Y = speed;
+            speed = 200f;
             IsAlive = true; // true for debug
         }
 
@@ -41,6 +39,7 @@ namespace TaxiCrash
         {
             if (IsAlive)
             {
+                velocity.Y = speed;
                 sprite.position += velocity * Game.DeltaTime;
 
                 if (Position.Y - sprite.Height * 0.5f >= Game.Win.Height)
@@ -49,17 +48,19 @@ namespace TaxiCrash
                 }
             }
         }
-
         public void Draw()
         {
             if (IsAlive)
             {
                 sprite.DrawTexture(texture);
             }
-            
+
         }
 
-        
-       
+        public void Stop()
+        {
+            speed = 0;
+        }
+
     }
 }

@@ -37,7 +37,9 @@ namespace TaxiCrash
                 // UPDATE
                 background.Update();
                 vehicle.Update();
-                player.Collides(vehicle);
+                player.Update(vehicle);
+                GameOver();
+               
 
                 // DRAW
                 background.Draw();
@@ -45,6 +47,15 @@ namespace TaxiCrash
                 vehicle.Draw();
 
                 window.Update();
+            }
+        }
+
+        private static void GameOver()
+        {
+            if (!player.IsAlive)
+            {
+                background.Stop();
+                vehicle.Stop();
             }
         }
 

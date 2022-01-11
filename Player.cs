@@ -23,8 +23,7 @@ namespace TaxiCrash
 
         public Vector2 Position { get { return sprite.position; } set { sprite.position = value; } }
 
-        public Vector2 Collider { get { return new Vector2(Position.X + sprite.Width * 0.5f, Position.Y - sprite.Height * 0.5f); } }
-
+        public Sprite Collider { get { return sprite; } }
         public Player()
         {
             texture = new Texture("Assets/taxi.png");
@@ -42,15 +41,19 @@ namespace TaxiCrash
 
         public void Input()
         {
-            if(IsAlive)
+            if (IsAlive)
             {
                 MovementInput();
             }
         }
 
-        public void Update()
+        public void Update(Vehicle vehicle)
         {
-            
+            if (Collision.GetCollision(vehicle.Collider, Collider))
+            {
+                IsAlive = false;
+                sprite.SetAdditiveTint(80, 0, 0, -200);
+            }
         }
 
         public void Draw()
@@ -78,7 +81,7 @@ namespace TaxiCrash
         {
             if ((Game.Win.GetKey(KeyCode.A) || Game.Win.GetKey(KeyCode.Left)) && counter > -3)
             {
-                if(!keyPressed)
+                if (!keyPressed)
                 {
                     MoveLeft();
                 }
@@ -97,27 +100,24 @@ namespace TaxiCrash
             }
         }
 
-        
 
-        public bool Collides(Vehicle vehicle)
-        {
-            if (vehicle.IsAlive)
-            {
-                Vector2 dist;
-                dist = Vector2.Subtract(Collider, vehicle.Collider);
 
-                if (dist.X == 0 && dist.Y <= 0)
-                {
-                    
-                    return true;
-                }
-            }
+        //public bool Collides(Vehicle vehicle)
+        //{
+        //    if (vehicle.IsAlive)
+        //    {
+        //        Vector2 dist;
+        //        dist = Vector2.Subtract(Collider, vehicle.Collider);
 
-            
-            return false;
-        }
+        //        if (dist.X == 0 && dist.Y <= 0)
+        //        {
+        //            return true;
+        //        }
+        //    }
+        //    return false;
+        //}
 
-        
+
 
 
 

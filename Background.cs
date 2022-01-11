@@ -45,5 +45,10 @@ namespace TaxiCrash
             sprite.DrawTexture(texture);
             sprite2.DrawTexture(texture);
         }
+
+        public void Stop()
+        {
+            speed = 0;
+        }
     }
 }
