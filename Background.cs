@@ -26,6 +26,11 @@ namespace TaxiCrash
             speed = 300.0f;
         }
 
+        public void SetSpeed(float speed)
+        {
+            this.speed += speed;
+        }
+
         public void Update()
         {
             sprite.position.Y += speed * Game.DeltaTime;

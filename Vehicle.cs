@@ -21,8 +21,8 @@ namespace TaxiCrash
         private float speed;
 
         public bool IsAlive;
-
-
+        public bool Gained;
+        
 
         public Vehicle()
         {
@@ -33,6 +33,7 @@ namespace TaxiCrash
 
             speed = 200f;
             IsAlive = true; // true for debug
+            Gained = false;
         }
 
         public void Update()
@@ -45,9 +46,17 @@ namespace TaxiCrash
                 if (Position.Y - sprite.Height * 0.5f >= Game.Win.Height)
                 {
                     IsAlive = false;
+                    ScoreManager.AddScore(this);
+                    
                 }
             }
         }
+
+        public Sprite GetSprite()
+        {
+            return sprite;
+        }
+
         public void Draw()
         {
             if (IsAlive)
