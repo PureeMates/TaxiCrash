@@ -38,6 +38,8 @@ namespace TaxiCrash
                 background.Update();
                 vehicle.Update();
                 player.Collides(vehicle);
+                ScoreManager.BgIncreaseSpeed(background);
+                
 
                 // DRAW
                 background.Draw();
