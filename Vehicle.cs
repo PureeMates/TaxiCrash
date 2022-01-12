@@ -24,12 +24,13 @@ namespace TaxiCrash
         public bool Gained;
         
 
-        public Vehicle()
+
+        public Vehicle(Texture texture)
         {
-            texture = new Texture("Assets/Audi.png");
+            this.texture = texture;
             sprite = new Sprite(texture.Width * 0.75f, texture.Height * 0.75f);
             sprite.pivot = new Vector2(sprite.Width * 0.5f, sprite.Height * 0.5f);
-            sprite.position = new Vector2(Game.Win.Width * 0.5f, 55.0f);
+            //sprite.position = new Vector2(Game.Win.Width * 0.5f, 55.0f);
 
             speed = 200f;
             IsAlive = true; // true for debug

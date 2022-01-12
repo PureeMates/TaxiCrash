@@ -12,8 +12,7 @@ namespace TaxiCrash
     {
         private static Window window;
         private static Background background;
-        private static Player player;
-        private static Vehicle vehicle;
+        private static Player player;        
 
         public static Window Win { get { return window; } }
 
@@ -23,8 +22,7 @@ namespace TaxiCrash
         {
             window = new Window(720, 900, "Taxi Crush");
             background = new Background();
-            player = new Player();
-            vehicle = new Vehicle();
+            player = new Player();            
         }
         public static void Play()
         {
@@ -36,15 +34,12 @@ namespace TaxiCrash
 
                 // UPDATE
                 background.Update();
-                vehicle.Update();
-                player.Update(vehicle);
-                GameOver();
-               
+                SpawnManager.Update();
+                //player.Collides(vehicle);
 
                 // DRAW
                 background.Draw();
-                player.Draw();
-                vehicle.Draw();
+                player.Draw();               
 
                 window.Update();
             }
