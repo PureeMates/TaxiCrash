@@ -7,74 +7,69 @@ using Aiv.Fast2D;
 
 namespace TaxiCrash
 {
-    
     static class ScoreManager
     {
-        public static float ScorePlayer;
-        public static float enemyPoints;
+        private static Background bg;
 
-        
-        //private static  int energy = 1;
+        private static int scorePlayer;
+        private static int enemyPoints;
 
-        static ScoreManager()
+        private static float bgExtraSpeed;
+        private static float vehicleExtraSpeed;
+
+        public static bool Gained;
+
+        public static void Init(Background _bg)
         {
-            ScorePlayer = 0.0f;
-            
-            enemyPoints = 1.0f;
-            
+            bg = _bg;
+
+            scorePlayer = 0;
+            enemyPoints = 1;
+
+            bgExtraSpeed = 150.0f;
+            vehicleExtraSpeed = 275.0f;
+
+            Gained = false;
         }
 
-        //public static void CheckOffSet(Vehicle vehicle)
-        //{
-        //    if (vehicle.Position.Y + vehicle.GetSprite().Height * 0.5f >= Game.Win.Height )
-        //    {
-        //        ScoreManager.AddScore(vehicle);
-        //    }
-        //}
-
-
-
-        //public static bool IsAlive()
-        //{
-        //    return energy > 0;
-        //}
-
-
+        public static void Update(List<Vehicle> vehicles)
+        {
+            if (scorePlayer > 0 && scorePlayer % 10 == 0)
+            {
+                if(!Gained)
+                {
+                    IncreaseSpeed(vehicles);
+                }
+            }
+            else
+            {
+                Gained = false;
+            }
+        }
 
         public static void AddScore(Vehicle vehicle)
         {
-            if (!vehicle.Gained && !vehicle.IsAlive)
+            if (!vehicle.Gained)
             {
                 vehicle.Gained = true;
-                ScorePlayer += enemyPoints;
-                Console.WriteLine("score : " + ScorePlayer);
-                
+                scorePlayer += enemyPoints;
             }
-   
         }
 
-
-        public static void BgIncreaseSpeed(Background bg)
+        private static void IncreaseSpeed(List<Vehicle> vehicles)
         {
-            if (ScorePlayer >= 1)
+            Gained = true;
+            for (int i = 0; i < vehicles.Count; i++)
             {
-                bg.SetSpeed(60);
+                vehicles[i].IncreaseSpeed(vehicleExtraSpeed);
             }
+            bg.IncreaseSpeed(bgExtraSpeed);
+            Console.WriteLine($"Score : {scorePlayer}, GOING FASTER!");
         }
-        
 
-
-
+        public static void DisplayScore()
+        {
+            Console.WriteLine($"YOUR SCORE IS: {scorePlayer}, CONGRATS!");
+        }
     }
-
-   
-
-    
-
-
-
-
-    
-
-    
 }

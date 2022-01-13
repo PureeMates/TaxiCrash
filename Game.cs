@@ -12,7 +12,9 @@ namespace TaxiCrash
     {
         private static Window window;
         private static Background background;
-        private static Player player;        
+        private static Player player;
+
+        private static bool gameOver;
 
         public static Window Win { get { return window; } }
 
@@ -22,25 +24,33 @@ namespace TaxiCrash
         {
             window = new Window(720, 900, "Taxi Crush");
             background = new Background();
-            player = new Player();            
+            player = new Player();
+
+            gameOver = false;
+
+            ScoreManager.Init(background);
         }
+
         public static void Play()
         {
             while (window.IsOpened)
             {
-                // INPUT
+                //INPUT
                 Quit();
                 player.Input();
 
-                // UPDATE
+                //UPDATE
                 background.Update();
                 SpawnManager.Update();
-                GameOver();
-                //player.Collides(vehicle);
+                ScoreManager.Update(SpawnManager.GetActiveVehicles());
+                player.Update(SpawnManager.GetActiveVehicles());
 
-                // DRAW
+                GameOver();
+
+                //DRAW
                 background.Draw();
-                player.Draw();               
+                player.Draw();
+                SpawnManager.Draw();
 
                 window.Update();
             }
@@ -48,9 +58,12 @@ namespace TaxiCrash
 
         private static void GameOver()
         {
-            if (!player.IsAlive)
+            if (!player.IsAlive && !gameOver)
             {
+                gameOver = true;
                 background.Stop();
+                SpawnManager.Stop();
+                ScoreManager.DisplayScore();
             }
         }
 

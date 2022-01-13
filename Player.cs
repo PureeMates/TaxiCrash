@@ -27,7 +27,7 @@ namespace TaxiCrash
         public Player()
         {
             texture = new Texture("Assets/taxi.png");
-            sprite = new Sprite(texture.Width * 0.75f, texture.Height * 0.75f);
+            sprite = new Sprite(texture.Width * 0.65f, texture.Height * 0.65f);
             sprite.pivot = new Vector2(sprite.Width * 0.5f, sprite.Height * 0.5f);
             sprite.position = new Vector2(Game.Win.Width * 0.5f, Game.Win.Height - 105.0f);
 
@@ -47,12 +47,20 @@ namespace TaxiCrash
             }
         }
 
-        public void Update(Vehicle vehicle)
+        public void Update(List<Vehicle> vehicles)
         {
-            if (Collision.GetCollision(vehicle.Collider, Collider))
+            for (int i = 0; i < vehicles.Count; i++)
             {
-                IsAlive = false;
-                sprite.SetAdditiveTint(80, 0, 0, -200);
+                if (Collision.GetCollision(vehicles[i].Collider, Collider))
+                {
+                    IsAlive = false;
+                    sprite.SetAdditiveTint(80, 0, 0, -200);
+                }
+            }
+
+            if(!IsAlive)
+            {
+                
             }
         }
 
@@ -99,28 +107,5 @@ namespace TaxiCrash
                 velocity.X = 0.0f;
             }
         }
-
-
-
-        //public bool Collides(Vehicle vehicle)
-        //{
-        //    if (vehicle.IsAlive)
-        //    {
-        //        Vector2 dist;
-        //        dist = Vector2.Subtract(Collider, vehicle.Collider);
-
-        //        if (dist.X == 0 && dist.Y <= 0)
-        //        {
-        //            return true;
-        //        }
-        //    }
-        //    return false;
-        //}
-
-
-
-
-
-
     }
 }

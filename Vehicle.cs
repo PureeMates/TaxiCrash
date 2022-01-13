@@ -20,57 +20,48 @@ namespace TaxiCrash
         private Vector2 velocity;
         private float speed;
 
-        public bool IsAlive;
         public bool Gained;
-        
-
 
         public Vehicle(Texture texture)
         {
             this.texture = texture;
-            sprite = new Sprite(texture.Width * 0.75f, texture.Height * 0.75f);
+            sprite = new Sprite(texture.Width * 0.65f, texture.Height * 0.65f);
             sprite.pivot = new Vector2(sprite.Width * 0.5f, sprite.Height * 0.5f);
-            //sprite.position = new Vector2(Game.Win.Width * 0.5f, 55.0f);
 
-            speed = 200f;
-            IsAlive = true; // true for debug
+            speed = 550.0f;
             Gained = false;
+        }
+
+        public void SetTexture(Texture texture)
+        {
+            this.texture = texture;
         }
 
         public void Update()
         {
-            if (IsAlive)
+            velocity.Y = speed;
+            sprite.position += velocity * Game.DeltaTime;
+
+            if (Position.Y - sprite.Height * 0.5f >= Game.Win.Height)
             {
-                velocity.Y = speed;
-                sprite.position += velocity * Game.DeltaTime;
-
-                if (Position.Y - sprite.Height * 0.5f >= Game.Win.Height)
-                {
-                    IsAlive = false;
-                    ScoreManager.AddScore(this);
-                    
-                }
+                ScoreManager.AddScore(this);
+                SpawnManager.ResetVehicle(this);
             }
-        }
-
-        public Sprite GetSprite()
-        {
-            return sprite;
         }
 
         public void Draw()
         {
-            if (IsAlive)
-            {
-                sprite.DrawTexture(texture);
-            }
+            sprite.DrawTexture(texture);
+        }
 
+        public void IncreaseSpeed(float speed)
+        {
+            this.speed += speed;
         }
 
         public void Stop()
         {
             speed = 0;
         }
-
     }
 }

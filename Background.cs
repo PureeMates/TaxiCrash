@@ -26,7 +26,7 @@ namespace TaxiCrash
             speed = 300.0f;
         }
 
-        public void SetSpeed(float speed)
+        public void IncreaseSpeed(float speed)
         {
             this.speed += speed;
         }
